@@ -38,7 +38,7 @@ export default function Home() {
 
         <p className={styles.code}>Get started by pressing the START button</p>
 
-        <Link href="/pokegrid">
+        <Link href="/pokegrid/page/1">
           <Button
             variant="contained"
             size="large"

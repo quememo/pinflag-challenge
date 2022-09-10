@@ -138,6 +138,14 @@
   margin-top: 1rem;
 }
 
+.back-btn {
+  font-size: 24px;
+  border-radius: 16px;
+  border: 4px;
+  border-color: "#11194a";
+  font-family: Roboto, Tahoma, sans-serif;
+}
+
 .pokegrid-header {
   margin: 1em 0;
   display: flex;
@@ -150,6 +158,12 @@
   font-weight: bold;
   font-size: 32px;
   background-color: #222;
+  border-radius: 30px;
+}
+
+.pagination-nav {
+  padding: 1rem;
+  background-color: white;
   border-radius: 30px;
 }
 

@@ -1,0 +1,27 @@
+.pokecard {
+  background-color: rgb(231 231 231);
+  border-radius: 32px;
+  border: 2px solid #222;
+  min-height: 350px;
+}
+
+.card-content {
+  height: 90px;
+  text-align: center;
+}
+
+.card-buttons {
+  display: flex;
+  justify-content: center;
+  padding: 12px 0;
+  column-gap: 12px;
+  flex: 0 1 40px;
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 14px;
+  height: 180px;
+}
