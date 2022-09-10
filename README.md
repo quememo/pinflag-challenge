@@ -1,6 +1,8 @@
 # Pinflag Pokedex Front-end challenge
 
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) made for the Pinflag Front-end challenge by `José Miguel Rojas Salgado`.
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) made for the Pinflag Front-end challenge.
+
+*By José Miguel Rojas Salgado.*
 
 ## Getting Started
 
