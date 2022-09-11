@@ -58,11 +58,21 @@ export default function Pokecard({ name, url }) {
         </Typography>
       </CardContent>
       <CardActions className={styles["card-buttons"]}>
-        <Button variant="contained" size="small" sx={{ borderRadius: 8 }}>
+        <Button
+          data-testid={`favorite-${name}`}
+          variant="contained"
+          size="small"
+          sx={{ borderRadius: 8 }}
+        >
           Favorite
         </Button>
         <Link href={`/pokedex/${pokemonId}`}>
-          <Button variant="contained" size="small" sx={{ borderRadius: 8 }}>
+          <Button
+            data-testid={`details-${name}`}
+            variant="contained"
+            size="small"
+            sx={{ borderRadius: 8 }}
+          >
             Details
           </Button>
         </Link>

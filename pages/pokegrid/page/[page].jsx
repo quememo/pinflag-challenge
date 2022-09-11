@@ -1,7 +1,6 @@
 import Link from "next/link";
 import styles from "../../../styles/Home.module.css";
-import Grid from "@mui/material/Grid";
-import Pokecard from "../../../components/Pokecard/Pokecard";
+import Pokegrid from "../../../components/Pokegrid/Pokegrid";
 import Head from "next/head";
 import range from "lodash/range";
 import Pagination from "@mui/material/Pagination";
@@ -10,7 +9,7 @@ import Stack from "@mui/material/Stack";
 import { Button } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
-export default function Pokegrid({ pokemonJSON }) {
+export default function PokegridPage({ pokemonJSON }) {
   const pokemonList = pokemonJSON.results;
   const remain = pokemonJSON.count % 3;
   const fillMap = { 0: 0, 1: 2, 2: 1 };
@@ -39,25 +38,12 @@ export default function Pokegrid({ pokemonJSON }) {
         />
       </Stack>
 
-      <Grid
-        container
-        columns={15}
-        rowGap={5}
-        direction="row"
-        justifyContent="space-around"
-      >
-        {pokemonList.map(({ name, url }) => (
-          <Grid key={name} item sm={4} sx={{ minWidth: 250 }}>
-            <Pokecard name={name} url={url} />
-          </Grid>
-        ))}
-
-        {!pokemonJSON.null
-          ? range(fillMap[remain]).map((i) => (
-              <Grid key={`filler_${i}`} item sm={4} sx={{ minWidth: 250 }} />
-            ))
-          : null}
-      </Grid>
+      <Pokegrid
+        pokemonJSON={pokemonJSON}
+        pokemonList={pokemonList}
+        remain={remain}
+        fillMap={fillMap}
+      />
 
       <Stack alignItems="center" sx={{ marginBottom: "2rem" }}>
         <Link href="/">
