@@ -8,6 +8,7 @@ import PaginationItem from "@mui/material/PaginationItem";
 import Stack from "@mui/material/Stack";
 import { Button } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 
 export default function PokegridPage({ pokemonJSON }) {
   const pokemonList = pokemonJSON.results;
@@ -24,6 +25,24 @@ export default function PokegridPage({ pokemonJSON }) {
       <div className={styles["pokegrid-header"]}>
         <div>PokeGrid</div>
       </div>
+
+      <Stack alignItems="center" sx={{ marginBottom: "2rem" }}>
+        <Link href="/pokegrid/favorites">
+          <Button
+            variant="contained"
+            size="large"
+            endIcon={<FavoriteIcon />}
+            className={styles["back-btn"]}
+            sx={{
+              "& .MuiSvgIcon-root": {
+                fontSize: "30px !important",
+              },
+            }}
+          >
+            Check Favorites
+          </Button>
+        </Link>
+      </Stack>
 
       <Stack alignItems="center" sx={{ margin: "2rem" }}>
         <Pagination

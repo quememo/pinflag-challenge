@@ -14,8 +14,29 @@ export default function Pokecard({ name, url }) {
   const [data, setData] = useState(null);
   const [isDataLoading, setImageLoading] = useState(true);
   const [pokemonId, setPokemonId] = useState(null);
+  const [isFavorite, setIsFavorite] = useState(false);
+
+  const addToFavoriteHandler = () => {
+    const favoriteList = JSON.parse(localStorage.getItem("favoriteList"));
+    favoriteList.push(name);
+    localStorage.setItem("favoriteList", JSON.stringify(favoriteList));
+    setIsFavorite(true);
+  };
+
+  const removeFromFavoriteHandler = () => {
+    let favoriteList = JSON.parse(localStorage.getItem("favoriteList"));
+    favoriteList = favoriteList.filter((e) => e !== name);
+    localStorage.setItem("favoriteList", JSON.stringify(favoriteList));
+    setIsFavorite(false);
+  };
 
   useEffect(() => {
+    const favoriteList = JSON.parse(localStorage.getItem("favoriteList"));
+    if (!favoriteList) localStorage.setItem("favoriteList", JSON.stringify([]));
+
+    if (favoriteList && favoriteList.includes(name)) setIsFavorite(true);
+    if (favoriteList && !favoriteList.includes(name)) setIsFavorite(false);
+
     const fetchData = async () => {
       const pokemonRes = await fetch(url);
       const pokemonJson = await pokemonRes.json();
@@ -27,7 +48,7 @@ export default function Pokecard({ name, url }) {
       }, 0.2 * 1000);
     };
     fetchData();
-  }, [url]);
+  }, [url, name]);
 
   return (
     <Card className={styles.pokecard}>
@@ -58,14 +79,29 @@ export default function Pokecard({ name, url }) {
         </Typography>
       </CardContent>
       <CardActions className={styles["card-buttons"]}>
-        <Button
-          data-testid={`favorite-${name}`}
-          variant="contained"
-          size="small"
-          sx={{ borderRadius: 8 }}
-        >
-          Favorite
-        </Button>
+        {isFavorite ? (
+          <Button
+            onClick={removeFromFavoriteHandler}
+            data-testid={`unfavorite-${name}`}
+            variant="contained"
+            size="small"
+            sx={{ borderRadius: 8 }}
+            color="error"
+          >
+            Remove from Favorite
+          </Button>
+        ) : (
+          <Button
+            onClick={addToFavoriteHandler}
+            data-testid={`favorite-${name}`}
+            variant="contained"
+            size="small"
+            sx={{ borderRadius: 8 }}
+          >
+            Add to Favorite
+          </Button>
+        )}
+
         <Link href={`/pokedex/${pokemonId}`}>
           <Button
             data-testid={`details-${name}`}
