@@ -26,10 +26,6 @@ export default function Pokegrid({ pokemonJSON }) {
         <div>PokeGrid</div>
       </div>
 
-      {/* <h2>
-        <Link href="/">Regresar</Link>
-      </h2> */}
-
       <Stack alignItems="center" sx={{ margin: "2rem" }}>
         <Pagination
           className={styles["pagination-nav"]}

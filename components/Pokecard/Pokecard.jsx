@@ -7,34 +7,24 @@ import Typography from "@mui/material/Typography";
 import styles from "./Pokecard.module.css";
 import capitalize from "lodash/capitalize";
 import CircularProgress from "@mui/material/CircularProgress";
-import LinearProgress from "@mui/material/LinearProgress";
 import { useState, useEffect } from "react";
+import Link from "next/link";
 
 export default function Pokecard({ name, url }) {
   const [data, setData] = useState(null);
-  // const [characteristics, setCharacteristics] = useState(null);
   const [isDataLoading, setImageLoading] = useState(true);
+  const [pokemonId, setPokemonId] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
       const pokemonRes = await fetch(url);
       const pokemonJson = await pokemonRes.json();
       setData(pokemonJson);
-
-      // const charRes = await fetch(
-      //   `https://pokeapi.co/api/v2/characteristic/${pokemonJson.id}/`
-      // );
-      // const charJson = await charRes.json();
-      // for (const description of charJson.descriptions) {
-      //   if (description.language.name === "en") {
-      //     setCharacteristics(description.description);
-      //     break;
-      //   }
-      // }
+      setPokemonId(pokemonJson.id);
 
       setTimeout(() => {
         setImageLoading(false);
-      }, 0.1 * 1000);
+      }, 0.2 * 1000);
     };
     fetchData();
   }, [url]);
@@ -66,18 +56,16 @@ export default function Pokecard({ name, url }) {
         >
           {capitalize(name)}
         </Typography>
-
-        {/* <Typography variant="body1" color="text.secondary">
-          {isDataLoading ? <LinearProgress /> : characteristics}
-        </Typography> */}
       </CardContent>
       <CardActions className={styles["card-buttons"]}>
         <Button variant="contained" size="small" sx={{ borderRadius: 8 }}>
           Favorite
         </Button>
-        <Button variant="contained" size="small" sx={{ borderRadius: 8 }}>
-          Details
-        </Button>
+        <Link href={`/pokedex/${pokemonId}`}>
+          <Button variant="contained" size="small" sx={{ borderRadius: 8 }}>
+            Details
+          </Button>
+        </Link>
       </CardActions>
     </Card>
   );
