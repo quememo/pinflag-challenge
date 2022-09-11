@@ -16,9 +16,9 @@ export default function FavoritesPage({}) {
     results: [],
   });
   const fillMap = { 0: 0, 1: 2, 2: 1 };
+  const [count, setCount] = useState(0);
 
   useEffect(() => {
-    console.log("CADA RUN DE USE EFFECT");
     const favoriteList = JSON.parse(localStorage.getItem("favoriteList"));
     if (!favoriteList) localStorage.setItem("favoriteList", JSON.stringify([]));
 
@@ -28,7 +28,6 @@ export default function FavoritesPage({}) {
       const pokeName = favorite;
       const pokeUrl = `https://pokeapi.co/api/v2/pokemon/${pokeName}/`;
       let mustAdd = true;
-      console.log(tempPokemonJSON);
       for (const entry of tempPokemonJSON.results) {
         if (entry.name == pokeName) {
           mustAdd = false;
@@ -39,9 +38,9 @@ export default function FavoritesPage({}) {
       if (mustAdd) {
         tempPokemonJSON.results.push({ name: pokeName, url: pokeUrl });
         tempPokemonJSON.count++;
+        setCount(tempPokemonJSON.count);
       }
     }
-    console.log(tempPokemonJSON);
     setPokemonJSON((pokemonJSON) => ({
       ...pokemonJSON,
       ...tempPokemonJSON,
@@ -62,7 +61,7 @@ export default function FavoritesPage({}) {
       <Pokegrid
         pokemonJSON={pokemonJSON}
         pokemonList={pokemonJSON.results}
-        remain={3}
+        remain={count % 3}
         fillMap={fillMap}
       />
 
