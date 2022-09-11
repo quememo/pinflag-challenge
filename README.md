@@ -6,7 +6,13 @@ _By José Miguel Rojas Salgado._
 
 ## Getting Started
 
-First, run the development server:
+First, install the required dependencies:
+
+```bash
+npm install
+```
+
+Then, run the development server:
 
 ```bash
 npm run dev
